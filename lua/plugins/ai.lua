@@ -13,7 +13,7 @@ return {
             api_key = "NVIM_MINUET_AI_OPENAI_API_KEY",
             end_point = os.getenv("NVIM_MINUET_AI_OPENAI_BASE_URL"),
             model = "gpt-4o-mini",
-            name = "stepcode",
+            name = os.getenv("NVIM_MINUET_AI_OPENAI_NAME"),
             stream = true,
           },
         },

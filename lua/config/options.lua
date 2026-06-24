@@ -19,7 +19,7 @@ if vim.env.SSH_CONNECTION then
 else
   vim.opt.clipboard = "unnamedplus"
 end
-vim.o.scrolloff = 5
-vim.o.sidescrolloff = 5
+vim.o.scrolloff = 8
+vim.o.sidescrolloff = 8
 vim.o.timeoutlen = 200
 vim.o.ttimeoutlen = 10

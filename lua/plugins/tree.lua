@@ -13,6 +13,18 @@ return {
       window = {
         width = 25,
         position = "left",
+        mappings = {
+          ["Y"] = {
+            function(state)
+              local node = state.tree:get_node()
+              local path = node:get_id()
+              vim.fn.setreg("+", path)
+              vim.fn.setreg('"', path)
+              vim.notify("Copied: " .. path)
+            end,
+            desc = "copy_absolute_path",
+          },
+        },
       },
       filesystem = {
         use_libuv_file_watcher = true,
