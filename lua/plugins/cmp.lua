@@ -9,24 +9,24 @@ return {
         },
       },
       sources = {
-        default = { "lsp", "path", "buffer", "snippets", "minuet" },
+        default = { "lsp", "path", "buffer", "snippets", "copilot" },
         providers = {
-          minuet = {
-            name = "minuet",
-            module = "minuet.blink",
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
             async = true,
             timeout_ms = 10000,
-            score_offset = 50,
+            score_offset = 100,
           },
         },
       },
       completion = {
-        trigger = { prefetch_on_insert = false },
-        ghost_text = { enabled = false },
-        list = {
-          selection = {
-            preselect = false,
-            auto_insert = false,
+        accept = {
+          auto_brackets = {
+            enabled = true,
+            semantic_token_resolution = {
+              enabled = false,
+            },
           },
         },
       },
@@ -36,7 +36,7 @@ return {
         ["<S-Tab>"] = { "select_prev", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         ["<C-y>"] = false,
-        ["<A-y>"] = require("minuet").make_blink_map(),
+        -- ["<A-y>"] = require("minuet").make_blink_map(),
       },
     },
   },

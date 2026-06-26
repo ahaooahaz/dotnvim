@@ -83,14 +83,6 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    optional = true,
-    opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, 1, {
-        require("minuet.lualine"),
-        display_name = "both",
-        display_on_idle = true,
-      })
-    end,
   },
   {
     "lukas-reineke/virt-column.nvim",
