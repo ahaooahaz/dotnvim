@@ -28,6 +28,10 @@ return {
           explorer = { enabled = false },
         },
       },
+      terminal = {
+        auto_insert = false,
+        start_insert = true,
+      },
     },
   },
   {
@@ -35,5 +39,15 @@ return {
     opts = {
       delay = 100,
     },
+  },
+  {
+    "wsdjeg/vim-fetch",
+    keys = {
+      { "gF", mode = { "n", "x" } },
+    },
+  },
+  {
+    "bogado/file-line",
+    event = { "BufReadPre", "BufNewFile" },
   },
 }

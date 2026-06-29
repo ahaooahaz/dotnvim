@@ -23,3 +23,4 @@ vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
 vim.o.timeoutlen = 200
 vim.o.ttimeoutlen = 10
+vim.o.cursorcolumn = true
