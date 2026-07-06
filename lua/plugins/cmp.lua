@@ -9,7 +9,7 @@ return {
         },
       },
       sources = {
-        default = { "lsp", "path", "buffer", "snippets", "copilot" },
+        default = { "lsp", "path", "snippets", "copilot" },
         providers = {
           copilot = {
             name = "copilot",
@@ -17,6 +17,9 @@ return {
             async = true,
             timeout_ms = 10000,
             score_offset = 100,
+          },
+          buffer = {
+            score_offset = -10,
           },
         },
       },
@@ -28,6 +31,12 @@ return {
               enabled = false,
             },
           },
+        },
+        list = {
+          max_items = 8,
+        },
+        documentation = {
+          auto_show = false,
         },
       },
       keymap = {

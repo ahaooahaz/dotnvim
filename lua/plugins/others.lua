@@ -29,7 +29,7 @@ return {
         },
       },
       terminal = {
-        auto_insert = false,
+        auto_insert = true,
         start_insert = true,
       },
     },
