@@ -31,3 +31,27 @@ map({ "n", "v" }, "x", '"_x', { noremap = true, silent = true })
 map({ "n", "v" }, "X", '"_X', { noremap = true, silent = true })
 
 map("n", "q", function() end, { desc = "disable macro recording" })
+
+map("n", "<leader>yl", function()
+  local abs = vim.fn.expand("%:p")
+  local root = require("lazyvim.util").root()
+  root = root:gsub("/$", "")
+
+  local file = abs
+  if abs:sub(1, #root + 1) == root .. "/" then
+    file = abs:sub(#root + 2)
+  else
+    file = vim.fn.fnamemodify(abs, ":.")
+  end
+
+  local text = file .. ":" .. vim.fn.line(".") .. ":" .. vim.fn.col(".")
+  vim.fn.setreg("+", text)
+  vim.notify("Copied: " .. text)
+end, { desc = "Copy relative file path line column" })
+
+map("n", "<leader>yL", function()
+  local file = vim.fn.expand("%:p")
+  local text = file .. ":" .. vim.fn.line(".") .. ":" .. vim.fn.col(".")
+  vim.fn.setreg("+", text)
+  vim.notify("Copied: " .. text)
+end, { desc = "Copy absolute file path and line" })

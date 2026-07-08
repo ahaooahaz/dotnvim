@@ -93,6 +93,59 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      local neocodeium_symbols = {
+        status = {
+          [0] = "󰚩 ",
+          [1] = "󱚧 ",
+          [2] = "󱙻 ",
+          [3] = "󱙺 ",
+          [4] = "󱙺 ",
+          [5] = "󱚠 ",
+          [6] = "󱚠 ",
+        },
+        server_status = {
+          [0] = "󰣺 ",
+          [1] = "󰣻 ",
+          [2] = "󰣽 ",
+        },
+      }
+
+      local function neocodeium_status()
+        local ok, neocodeium = pcall(require, "neocodeium")
+        if not ok then
+          return ""
+        end
+
+        local status, server_status = neocodeium.get_status()
+
+        return (neocodeium_symbols.status[status] or "") .. (neocodeium_symbols.server_status[server_status] or "")
+      end
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = {
+          "NeoCodeiumServer*",
+          "NeoCodeium*Enabled",
+          "NeoCodeium*Disabled",
+        },
+        callback = function()
+          pcall(function()
+            require("lualine").refresh()
+          end)
+        end,
+      })
+
+      opts.sections = opts.sections or {}
+      opts.sections.lualine_x = opts.sections.lualine_x or {}
+
+      table.insert(opts.sections.lualine_x, 1, {
+        neocodeium_status,
+        color = { fg = "yellow" },
+        cond = function()
+          return package.loaded["neocodeium"] ~= nil
+        end,
+      })
+    end,
   },
   {
     "lukas-reineke/virt-column.nvim",
