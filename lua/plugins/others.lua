@@ -50,4 +50,21 @@ return {
     "bogado/file-line",
     event = { "BufReadPre", "BufNewFile" },
   },
+  {
+    "regomne/nvim-step-search.lua",
+    cmd = { "StepSearch", "StepSearchList", "StepSearchReset" },
+    opts = {},
+  },
+  {
+    "s1n7ax/nvim-window-picker",
+    name = "window-picker",
+    event = "VeryLazy",
+    version = "2.*",
+    opts = {
+      hint = "floating-big-letter",
+    },
+    config = function(_, opts)
+      require("window-picker").setup(opts)
+    end,
+  },
 }
