@@ -19,6 +19,31 @@ return {
         view = {
           { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } },
           { "n", "<Esc>", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } },
+          {
+            "n",
+            "<leader>hr",
+            function()
+              require("gitsigns").reset_hunk()
+            end,
+            { desc = "Reset hunk (回退光标处修改)" },
+          },
+          {
+            "v",
+            "<leader>hr",
+            function()
+              require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+            end,
+            { desc = "Reset hunk (选区)" },
+          },
+          { "n", "<leader>ho", "do", { desc = "Diff obtain (还原此 hunk)" } },
+          {
+            "n",
+            "<leader>hR",
+            function()
+              require("gitsigns").reset_buffer()
+            end,
+            { desc = "Reset buffer (回退整个文件)" },
+          },
         },
         file_panel = {
           { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } },
