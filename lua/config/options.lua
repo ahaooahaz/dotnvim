@@ -24,3 +24,8 @@ vim.o.sidescrolloff = 8
 vim.o.timeoutlen = 200
 vim.o.ttimeoutlen = 10
 vim.o.cursorcolumn = true
+vim.filetype.add({
+  extension = {
+    json = "jsonc",
+  },
+})
