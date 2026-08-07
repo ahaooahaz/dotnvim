@@ -20,7 +20,11 @@ return {
             "--completion-style=detailed",
             "--function-arg-placeholders=0",
             "--fallback-style=llvm",
+            "-j=6",
+            "--pch-storage=disk",
+            "--malloc-trim",
           },
+          cmd_env = { MALLOC_ARENA_MAX = "2" },
           init_options = {
             usePlaceholders = false,
           },
