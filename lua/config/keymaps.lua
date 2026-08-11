@@ -32,6 +32,17 @@ map({ "n", "v" }, "X", '"_X', { noremap = true, silent = true })
 
 map("n", "q", function() end, { desc = "disable macro recording" })
 
+-- quicker.nvim: LazyVim 默认的 <leader>xq 调原生 :copen，高度硬编码 10 行。
+-- 换成 quicker 的 toggle()，高度按结果条数自适应。
+-- min_height 设 10 是为了不比原生的固定 10 行更矮。
+map("n", "<leader>xq", function()
+  require("quicker").toggle({ min_height = 10, max_height = 25 })
+end, { desc = "Quickfix List" })
+
+map("n", "<leader>xl", function()
+  require("quicker").toggle({ loclist = true, min_height = 10, max_height = 25 })
+end, { desc = "Location List" })
+
 map("n", "<leader>yl", function()
   local abs = vim.fn.expand("%:p")
   local root = require("lazyvim.util").root()
