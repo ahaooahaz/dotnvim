@@ -70,6 +70,12 @@ return {
       integrations = {
         diffview = true,
       },
+      -- 去掉 commit 视图中 l 键的 LogPopup 映射，让 l 恢复为正常方向键
+      mappings = {
+        popup = {
+          ["l"] = false,
+        },
+      },
     },
   },
 }
