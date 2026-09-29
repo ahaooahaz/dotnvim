@@ -9,6 +9,20 @@ return {
         keymap = {
           preset = "inherit",
         },
+        completion = {
+          list = {
+            selection = {
+              preselect = false,
+              auto_insert = false,
+            },
+          },
+          menu = {
+            auto_show = true,
+          },
+          ghost_text = {
+            enabled = true,
+          },
+        },
       }
 
       opts.sources.default = {
