@@ -38,6 +38,10 @@ return {
     "folke/which-key.nvim",
     opts = {
       delay = 100,
+      -- LazyVim 对 which-key 设了 opts_extend = { "spec" }，这里是追加而非覆盖。
+      spec = {
+        { "<leader>y", group = "yank/copy" },
+      },
     },
   },
   {

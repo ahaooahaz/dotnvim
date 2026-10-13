@@ -13,16 +13,12 @@ return {
     "snacks.nvim",
     opts = {
       dashboard = {
-        preset = {
-          header = [[
- ▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ ▄     ▄            
-█      █  █ █  █       █ █ ▄ █ █          Z
-█  ▄   █  █▄█  █   ▄   █ ██ ██ █      Z    
-█ █▄█  █       █  █ █  █       █   z       
-█      █   ▄   █  █▄█  █       █ z         
-█  ▄   █  █ █  █       █   ▄   █           
-█▄█ █▄▄█▄▄█ █▄▄█▄▄▄▄▄▄▄█▄▄█ █▄▄█           
-   ]],
+        sections = {
+          function()
+            return require("config.dashboard_stars").section()
+          end,
+          { section = "keys", gap = 1, padding = 1 },
+          { section = "startup" },
         },
       },
       notifier = {
