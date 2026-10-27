@@ -19,6 +19,8 @@ if vim.env.SSH_CONNECTION then
 else
   vim.opt.clipboard = "unnamedplus"
 end
+-- Keep file:line:col jumps intact when bufferline toggles the tabline and resizes windows.
+vim.o.splitkeep = "cursor"
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
 vim.o.timeoutlen = 200
