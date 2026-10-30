@@ -28,9 +28,15 @@ return {
       opts.sources.default = {
         "lsp",
         "path",
-        "snippets",
         "copilot",
       }
+
+      -- Hide snippet candidates, including those supplied by language servers.
+      opts.sources.transform_items = function(_, items)
+        return vim.tbl_filter(function(item)
+          return item.kind ~= vim.lsp.protocol.CompletionItemKind.Snippet
+        end, items)
+      end
 
       opts.sources.providers.lsp = {
         fallbacks = {},
@@ -57,6 +63,8 @@ return {
         accept = {
           auto_brackets = {
             enabled = true,
+            -- With LSP snippets disabled, blink must add clangd's parentheses itself.
+            force_allow_filetypes = { "cpp", "objc", "objcpp" },
             semantic_token_resolution = {
               enabled = false,
             },
