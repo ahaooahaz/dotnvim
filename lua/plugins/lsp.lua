@@ -12,6 +12,13 @@ return {
             },
           },
         },
+        taplo = {
+          settings = {
+            evenBetterToml = {
+              schema = { enabled = false },
+            },
+          },
+        },
         buf_ls = {},
         lua_ls = {
           settings = {
