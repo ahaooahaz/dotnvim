@@ -66,3 +66,5 @@ map("n", "<leader>yL", function()
   vim.fn.setreg("+", text)
   vim.notify("Copied: " .. text)
 end, { desc = "Copy absolute file path and line" })
+
+map({ "n", "i", "v", "c", "t" }, "<F1>", "<Nop>", { desc = "Disable F1" })
