@@ -224,17 +224,18 @@ local function create_dashboard()
   end
 
   local function resume(state)
-    if visible(state) and state.font ~= M.config.font then
-      state.dashboard:update()
-      return
-    end
-    draw(state)
     if not visible(state) then
       if not state.closed then
         stop(state)
       end
       return
     end
+    if state.font ~= M.config.font then
+      state.dashboard:update()
+      return
+    end
+    -- Focus/visibility changes do not change glyph geometry. Only a dashboard
+    -- rerender, font/layout change or theme change needs to restore extmarks.
     if state.timer:is_active() then
       return
     end
@@ -264,6 +265,17 @@ local function create_dashboard()
     end)
   end
 
+  local function schedule_resume(state)
+    if state.closed or state.resume_pending then
+      return
+    end
+    state.resume_pending = true
+    vim.schedule(function()
+      state.resume_pending = false
+      resume(state)
+    end)
+  end
+
   local function attach(dashboard, pos, logo)
     local state = states[dashboard.buf]
     if not state then
@@ -286,15 +298,14 @@ local function create_dashboard()
           -- Snacks rewrites the buffer during layout: restore only our overlay.
           if not state.closed then
             api.nvim_buf_clear_namespace(state.buf, ns, 0, -1)
+            draw(state)
             resume(state)
           end
         end,
       })
       on({ "BufEnter", "BufWinEnter", "WinEnter", "TabEnter", "WinClosed" }, {
         callback = function()
-          vim.schedule(function()
-            resume(state)
-          end)
+          schedule_resume(state)
         end,
       })
       on("ColorScheme", {
@@ -622,6 +633,7 @@ return {
   },
   {
     "lukas-reineke/virt-column.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {},
     config = function()
       require("virt-column").setup({
